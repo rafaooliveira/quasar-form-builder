@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { empty, eq } from "@formkit/utils"
 import type { FormKitNode, FormKitSchemaDefinition } from "@formkit/core"
+import WithLabelAndDescription from '~/builder/app/components/WithLabelAndDescription.vue'
 
 defineProps<{ formFields: FormKitSchemaDefinition[] }>()
 const emit = defineEmits(["submit", "on:update-values"])
 const values = reactive({})
 
-const data = computed(() => ({ ...values, empty, eq, contains }))
+const data = computed(() => ({ ...values, empty, eq }))
 
 function updateValues(newValues: any) {
   Object.assign(values, newValues)

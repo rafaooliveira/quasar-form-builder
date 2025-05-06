@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import type { FormKitSchemaDefinition } from '@formkit/core'
 import type { LogicField } from '~/types'
-import { operators, htmlTypes } from '~/constants'
+import { operators, htmlTypes } from '../../../constants'
 import { checkboxOperators } from '../../../constants';
+import { parseLogic } from '~/builder/app/utils/formUtils'  
 
 const props = defineProps<{ noConditionsMessage?: string, conditionsDialogSubtitle?: string, saveTo?: 'if' | 'validation' | 'disable' | 'readonly' }>()
 
 const { dark } = useQuasar()
+import { useFormStore } from '@/builder/app/stores/formStore'
 const formStore = useFormStore()
 const { onEnteredProp, getFieldByName } = formStore
 

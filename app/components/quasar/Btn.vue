@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import WithLabelAndDescription from '~/builder/app/components/WithLabelAndDescription.vue'
 import type { FormKitFrameworkContext } from '@formkit/core'
 import type { QBtnProps } from 'quasar'
 

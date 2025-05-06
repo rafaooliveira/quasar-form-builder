@@ -1,10 +1,11 @@
 import type { FormKitSchemaDefinition, FormKitSchemaNode } from '@formkit/core'
 import type { ActiveFieldType, ColumnsType, FormSettingsType, FormViewportType } from '~/types'
-
+import { useFormHistoryStore } from './formHistoryStore'
+import { generateUniqueName, isEmptyObject, nameExists } from '../utils/index'
 export const useFormStore = defineStore('formStore', () => {
   const { notify, localStorage } = useQuasar()
-  const formHistoryStore = useFormHistoryStore()
-
+  
+  
   const cachedFormFields: string | null = localStorage.getItem('form-fields')
 
   const formSettings = ref<FormSettingsType>({
@@ -48,6 +49,7 @@ export const useFormStore = defineStore('formStore', () => {
   })
 
   const cacheFormFields = () => {
+    const formHistoryStore = useFormHistoryStore()
     formHistoryStore.addToMemory(formFields.value)
     localStorage.setItem('form-fields', JSON.stringify(formFields.value))
   }
@@ -64,9 +66,7 @@ export const useFormStore = defineStore('formStore', () => {
   const addField = (field: FormKitSchemaNode, pos?: number | null) => {
     pos = Number(pos)
     const formLength = formFields.value.length
-
     field.name = generateUniqueName(field?.name, formFields.value)
-
     if (pos <= 0) {
       formFields.value.unshift(field)
     } else if (pos >= formLength) {
@@ -74,7 +74,6 @@ export const useFormStore = defineStore('formStore', () => {
     } else {
       formFields.value.splice(pos, 0, field)
     }
-
     notify({ color: 'dark', message: `${field?.name} adicionado` })
     cacheFormFields()
   }

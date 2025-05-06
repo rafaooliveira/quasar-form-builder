@@ -10,11 +10,12 @@ export function generateUniqueName(
   name: string,
   formFields: Array<FormKitSchemaDefinition>,
 ): string {
+  const baseName = name?.trim() || 'field'
   const formLength = formFields.length
 
   return [...new Array(formLength + 1).keys()]
-    .map(counter => (counter === 0 ? name : `${name}_${counter}`))
-    .find(uniqueName => !nameExists(uniqueName, formFields)) || name
+    .map(counter => (counter === 0 ? baseName : `${baseName}_${counter}`))
+    .find(uniqueName => !nameExists(uniqueName, formFields)) || `${baseName}_${formLength + 1}`
 }
 
 export function isEmptyObject(value: any): boolean {

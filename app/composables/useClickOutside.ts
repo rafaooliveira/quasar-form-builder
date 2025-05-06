@@ -19,6 +19,7 @@
  * stopListening();
  * ```
  */
+import { useEventListener } from './useEventListener'
 export function useClickOutside<T extends Ref<HTMLElement | null>, F extends Ref<HTMLElement | null>, Fn extends (e: MouseEvent) => void>(outerElement: T, target: F, handler: Fn, options?: boolean | AddEventListenerOptions,
 ): () => void {
   const targetValue = unref(target)

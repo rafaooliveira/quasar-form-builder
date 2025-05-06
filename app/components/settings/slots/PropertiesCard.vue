@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { FormKitSchemaDefinition } from "@formkit/core"
-import { getTypesBasedOnFieldType } from "~/utils"
-import { fieldTypes } from "~/constants"
+import { getTypesBasedOnFieldType } from "../../../utils"
+import { fieldTypes } from "../../../constants"
 
 defineProps<{ hasInputType?: boolean, hasTooltip?: boolean, hasPlaceholder?: boolean, hasDescription?: boolean }>()
 
 const { dark, localStorage } = useQuasar()
+import { useFormStore } from '@/builder/app/stores/formStore'
 const formStore = useFormStore()
 const { onEnteredProp } = formStore
 

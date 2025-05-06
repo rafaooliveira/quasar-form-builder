@@ -21,6 +21,8 @@
  * });
  * ```
  */
+import { useEventListener } from './useEventListener'
+
 export function useEventOutside<
   T extends Ref<HTMLElement | null>,
   F extends Ref<HTMLElement | null>,

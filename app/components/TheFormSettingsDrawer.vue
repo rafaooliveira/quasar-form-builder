@@ -1,8 +1,18 @@
 <script setup lang="ts">
+import SettingsQBtnConfig from './settings/QBtnConfig.vue'
+import SettingsQInputConfig from './settings/QInputConfig.vue'
+import SettingsQSelectConfig from './settings/QSelectConfig.vue'
+import SettingsQCheckboxConfig from './settings/QCheckboxConfig.vue'
+import SettingsQSeparatorConfig from './settings/QSeparatorConfig.vue'
+import SettingsHTMLConfig from './settings/HTMLConfig.vue'
+import SettingsDefaultNoConfig from './settings/DefaultNoConfig.vue'
 import { except } from '@formkit/utils'
+import { useQuasar } from 'quasar'
 import { isDevelopment } from "std-env"
-import { htmlTypes } from '~/constants'
-
+import { htmlTypes } from '../constants'
+import { useFormStore } from '../stores/formStore'
+import { highlightJson } from '../utils/highlight'
+import { computed, onMounted, ref, resolveComponent } from 'vue'
 const model = defineModel<boolean>()
 const { dark, localStorage } = useQuasar()
 const formStore = useFormStore()
@@ -10,33 +20,36 @@ const { changePreviewWidth, togglePreviewFullWidth } = formStore
 
 // Possible properties are: ["properties","submission","validation","layout"]
 const formClosed = JSON.parse(localStorage.getItem('form-closed') || '[]')
-const SettingsQBtnConfigComponent = resolveComponent('SettingsQBtnConfig')
-const SettingsQInputConfigComponent = resolveComponent('SettingsQInputConfig')
-const SettingsQSelectConfigComponent = resolveComponent('SettingsQSelectConfig')
-const SettingsQCheckboxConfigComponent = resolveComponent('SettingsQCheckboxConfig')
-const SettingsQSeparatorConfigComponent = resolveComponent('SettingsQSeparatorConfig')
-const SettingsHTMLConfigComponent = resolveComponent('SettingsHTMLConfig')
-const SettingsDefaultNoConfigComponent = resolveComponent('SettingsDefaultNoConfig')
+
 
 const formNameInputRef = ref<HTMLElement | null>(null)
-const useHighlight = await highlightJson()
+
+const useHighlight = ref<null | ((data: any, isDark: boolean) => string)>(null)
+
+onMounted(async () => {
+  useHighlight.value = await highlightJson()
+})
+
 
 const htmlValues = computed(() => {
+  if (!useHighlight.value) return ''  // Ou algum valor padrão até carregar
+
   const validValues = except(formStore.values, ['submit', 'slots', 'empty', 'eq'])
-  return useHighlight(validValues, dark.isActive)
+  return useHighlight.value(validValues, dark.isActive)
 })
 
 const getComponentSettings = computed(() => {
+  if (formStore.activeField?.$formkit === 'q-btn') return SettingsQBtnConfig
+  if (formStore.activeField?.$formkit === 'q-input') return SettingsQInputConfig
+  if (formStore.activeField?.$formkit === 'q-select') return SettingsQSelectConfig
+  if (formStore.activeField?.$formkit === 'q-checkbox') return SettingsQCheckboxConfig
+  if (formStore.activeField?.$el === 'hr') return SettingsQSeparatorConfig
 
-  if (formStore.activeField?.$formkit === 'q-btn') return SettingsQBtnConfigComponent
-  if (formStore.activeField?.$formkit === 'q-input') return SettingsQInputConfigComponent
-  if (formStore.activeField?.$formkit === 'q-select') return SettingsQSelectConfigComponent
-  if (formStore.activeField?.$formkit === 'q-checkbox') return SettingsQCheckboxConfigComponent
-  if (formStore.activeField?.$el === 'hr') return SettingsQSeparatorConfigComponent
+  if (formStore.activeField?.$el && htmlTypes.map(htmlType => htmlType.value).includes(formStore.activeField?.$el)) {
+    return SettingsHTMLConfig
+  }
 
-  if (formStore.activeField?.$el && htmlTypes.map(htmlType => htmlType.value).includes(formStore.activeField?.$el)) return SettingsHTMLConfigComponent
-
-  return SettingsDefaultNoConfigComponent
+  return SettingsDefaultNoConfig
 })
 
 function onClickLabelFormName() {

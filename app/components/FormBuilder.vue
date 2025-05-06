@@ -3,7 +3,10 @@ import type { FormKitNode, FormKitSchemaDefinition, FormKitSchemaNode } from '@f
 import { empty, eq } from '@formkit/utils'
 import { clearErrors, FormKitSchema, reset } from '@formkit/vue'
 import type { ActiveFieldType } from '../types'
-
+import WithLabelAndDescription from '~/builder/app/components/WithLabelAndDescription.vue'
+import { useClickOutside } from '~/builder/app/composables/useClickOutside'
+import { useEventListener } from '~/builder/app/composables/useEventListener'
+import { useEventOutside } from '~/builder/app/composables/useEventOutside'
 // local variables
 const highlightDropArea = ref<boolean>(false)
 const previewFormSectionRef = ref<HTMLElement | null>(null)
@@ -18,7 +21,8 @@ const isUserDraggingOver = ref(false)
 const isDragging = ref(true)
 const startX = ref(0)
 const lastDeltaColumns = ref(0)
-
+import { useFormStore } from '@/builder/app/stores/formStore'
+ 
 const { dark } = useQuasar()
 const formStore = useFormStore()
 const { setActiveField, copyField, updateActiveFieldColumns, updateActiveFieldOnFormFields } = formStore
@@ -79,7 +83,7 @@ const data = computed(() => {
   /*
   This returned functions are essentials for FormKit's data expression
   */
-  return { ...formStore.values, empty, eq, contains }
+  return { ...formStore.values, empty, eq }
 })
 
 function onDragEnterFormSectionArea() {
@@ -99,6 +103,8 @@ function onDrop(ev: DragEvent) {
   if (toolData) {
     try {
       const tool: FormKitSchemaNode = JSON.parse(toolData)
+      // console.log('chamou nois valor de tool', tool)
+      // console.log('chamou nois valor de indexPointer.value', indexPointer.value)
       formStore.addField(tool, indexPointer.value)
     } catch {
       // silent error
@@ -124,6 +130,7 @@ function handleDragover(ev: DragEvent) {
 }
 
 function onDragEnterInDropArea(e: DragEvent, fieldName: string, index: number) {
+  console.log('index', index)
   dragInIndicator.value.index = index
   dragInIndicator.value.name = fieldName
   indexPointer.value = index

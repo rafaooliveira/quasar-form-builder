@@ -4,6 +4,7 @@ import type { ColumnsType } from '~/types'
 defineProps<{ showFullWidth?: boolean, showAlignment?: boolean, showSize?: boolean, showDense?: boolean, setAttrs?: boolean }>()
 
 const { dark, localStorage } = useQuasar()
+import { useFormStore } from '@/builder/app/stores/formStore'
 const formStore = useFormStore()
 const { changeViewport, updateActiveFieldColumns, onEnteredProp } = formStore
 

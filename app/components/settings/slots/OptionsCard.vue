@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { htmlTypes } from "~/constants"
-
+import { htmlTypes } from "../../../constants"
+import { useFormStore } from '@/builder/app/stores/formStore'
 const { dark, localStorage } = useQuasar()
 const formStore = useFormStore()
 const { onEnteredProp } = formStore

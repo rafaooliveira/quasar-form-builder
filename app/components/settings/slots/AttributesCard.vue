@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { dark, localStorage } = useQuasar()
+import SettingsSlotsConditionsCard from '~/builder/app/components/settings/slots/ConditionsCard.vue'
+import { useFormStore } from '@/builder/app/stores/formStore'
 const formStore = useFormStore()
 const { onEnteredProp } = formStore
 
