@@ -14,7 +14,7 @@ dist
 .yarn/cache
 .yarn/*state*
 
-# Local History
+# Local Historico
 .history
 
 # VSCode

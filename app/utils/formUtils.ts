@@ -260,7 +260,7 @@ export function generateHumanReadableText(parsedLogic: LogicField[], operators: 
 }
 
 function groupConditions(values: string[]): string[] {
-  // Group conditions using reduce
+  // Grupo conditions using reduce
   const grouped = values.reduce<Record<string, string[]>>((acc, condition) => {
     // Match for "key == value" or "key != value"
     const match = condition.match(/(.+?)(==|!=)\s*(.+)/)

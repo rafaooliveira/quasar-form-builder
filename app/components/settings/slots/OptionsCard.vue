@@ -34,7 +34,7 @@ function onTypeUpdateModelValue(val: any) {
   onEnteredProp('$el', val.value)
 }
 
-function onBlurContentInput(_: Event) {
+function onBlurContentInput(_: Evento) {
   const trimmedValue = elementStates.content?.trim()
   onEnteredProp('children', trimmedValue)
 }
