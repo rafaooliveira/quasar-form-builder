@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FormKitFrameworkContext } from '@formkit/core'
-import { useValidationMessages } from '~/builder/app/composables/useValidationMessages'
+import { useValidationMessages } from '../../composables/useValidationMessages'
 
 import type { QInputProps } from 'quasar'
 

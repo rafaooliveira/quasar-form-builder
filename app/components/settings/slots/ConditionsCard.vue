@@ -8,7 +8,7 @@ import { parseLogic } from '~/builder/app/utils/formUtils'
 const props = defineProps<{ noConditionsMessage?: string, conditionsDialogSubtitle?: string, saveTo?: 'if' | 'validation' | 'disable' | 'readonly' }>()
 
 const { dark } = useQuasar()
-import { useFormStore } from '@/builder/app/stores/formStore'
+import { useFormStore } from '../../../stores/formStore'
 const formStore = useFormStore()
 const { onEnteredProp, getFieldByName } = formStore
 
