@@ -1,3 +1,10 @@
 {
-  "extends": "./.playground/.nuxt/tsconfig.json"
+  "extends": "../tsconfig.json", // ou tsconfig.base.json
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["../*"] // garante que o import ~ aponta pra raiz
+    }
+  },
+  "include": ["app/**/*.ts", "app/**/*.vue"]
 }
