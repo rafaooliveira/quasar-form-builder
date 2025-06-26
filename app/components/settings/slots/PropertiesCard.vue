@@ -6,7 +6,7 @@ import { fieldTypes } from "../../../constants"
 defineProps<{ hasInputType?: boolean, hasTooltip?: boolean, hasPlaceholder?: boolean, hasDescription?: boolean }>()
 
 const { dark, localStorage } = useQuasar()
-import { useFormStore } from '@/builder/app/stores/formStore'
+import { useFormStore } from '../../../stores/formStore'
 const formStore = useFormStore()
 const { onEnteredProp } = formStore
 

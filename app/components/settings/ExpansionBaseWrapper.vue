@@ -23,7 +23,7 @@ const slots = defineSlots<{
 }>()
 
 const { dark, localStorage } = useQuasar()
-import { useFormStore } from '@/builder/app/stores/formStore'
+import { useFormStore } from '../../stores/formStore'
 const formStore = useFormStore()
 const { setActiveField, copyField, removeField } = formStore
 

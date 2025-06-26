@@ -21,7 +21,7 @@ const isUserDraggingOver = ref(false)
 const isDragging = ref(true)
 const startX = ref(0)
 const lastDeltaColumns = ref(0)
-import { useFormStore } from '@/builder/app/stores/formStore'
+import { useFormStore } from '../stores/formStore'
  
 const { dark } = useQuasar()
 const formStore = useFormStore()
