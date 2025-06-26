@@ -3,10 +3,10 @@ import type { FormKitNode, FormKitSchemaDefinition, FormKitSchemaNode } from '@f
 import { empty, eq } from '@formkit/utils'
 import { clearErrors, FormKitSchema, reset } from '@formkit/vue'
 import type { ActiveFieldType } from '../types'
-import WithLabelAndDescription from '~/builder/app/components/WithLabelAndDescription.vue'
-import { useClickOutside } from '~/builder/app/composables/useClickOutside'
-import { useEventListener } from '~/builder/app/composables/useEventListener'
-import { useEventOutside } from '~/builder/app/composables/useEventOutside'
+import WithLabelAndDescription from '../../app/components/WithLabelAndDescription.vue'
+import { useClickOutside } from '../../app/composables/useClickOutside'
+import { useEventListener } from '../../app/composables/useEventListener'
+import { useEventOutside } from '../../app/composables/useEventOutside'
 // local variables
 const highlightDropArea = ref<boolean>(false)
 const previewFormSectionRef = ref<HTMLElement | null>(null)
