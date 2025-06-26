@@ -3,7 +3,7 @@ import type { FormKitSchemaDefinition } from '@formkit/core'
 import type { LogicField } from '~/types'
 import { operators, htmlTypes } from '../../../constants'
 import { checkboxOperators } from '../../../constants';
-import { parseLogic } from '~/builder/app/utils/formUtils'  
+import { parseLogic } from '../../../utils/formUtils'
 
 const props = defineProps<{ noConditionsMessage?: string, conditionsDialogSubtitle?: string, saveTo?: 'if' | 'validation' | 'disable' | 'readonly' }>()
 
