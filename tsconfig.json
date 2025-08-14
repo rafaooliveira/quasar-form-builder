@@ -1,9 +1,10 @@
 {
-  "extends": "../tsconfig.json", // ou tsconfig.base.json
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["../*"] // garante que o import ~ aponta pra raiz
+      "~/*": ["app/*"],
+      "@/*": ["app/*"]
     }
   },
   "include": ["app/**/*.ts", "app/**/*.vue"]
