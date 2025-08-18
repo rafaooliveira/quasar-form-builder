@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { FormKitFrameworkContext } from '@formkit/core'
 import type { QSelectProps } from 'quasar'
-import { useValidationMessages } from '~/composables/useValidationMessages'
-
+import { useValidationMessages } from '../../composables/useValidationMessages'
 
 const props = defineProps<{ context: FormKitFrameworkContext & { attrs: QSelectProps } }>()
 const { hasError, getMessages, checkForErrorMessages } = useValidationMessages(props.context?.node)
